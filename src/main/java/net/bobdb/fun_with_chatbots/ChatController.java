@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import reactor.core.publisher.Flux;
 
 @RestController
 class ChatController {
@@ -27,5 +28,14 @@ class ChatController {
                 .call()
                 .content();
     }
+
+    @PostMapping("/chatUsingStream")
+    Flux<String> chatUsingStream(@RequestParam String message) {
+        return chatClient.prompt()
+                .user(message)
+                .stream()
+                .content();
+    }
+
 
 }
