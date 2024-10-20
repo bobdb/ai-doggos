@@ -1,6 +1,8 @@
 package net.bobdb.fun_with_chatbots;
 
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
+import org.springframework.ai.chat.memory.InMemoryChatMemory;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 
@@ -11,7 +13,9 @@ class ChatController {
     private final ChatClient chatClient;
 
     public ChatController(ChatClient.Builder builder) {
-        this.chatClient = builder.build();
+        this.chatClient = builder
+                            .defaultAdvisors(new MessageChatMemoryAdvisor(new InMemoryChatMemory()))
+                            .build();
     }
 
     @GetMapping("/hello")
