@@ -7,12 +7,15 @@ All this was derived from from Dan Vega's yt project.  I should have just forked
 
 I also think that I'm going to link in Elasticsearch
 
-## So far, 4 endpoints
+## So far, 6 endpoints
 
-/hello - for testing
-/chat - for blocking openAI 
-/stream - for streaming openAI
+- /hello - for testing
+- /chat - for blocking openAI 
+- /stream - for streaming openAI
 
-/dogs - get all dogs, all fields
-/dogs/search/example - POST - QBE exact
-/dogs/search/one - POST - QBE exact
+
+- /dogs - get all dogs, all fields
+- /dogs/search/example - POST - QBE exact
+- /dogs/search/one - POST - QBE exact
+
+a Dog looks like {name, breed, description}
