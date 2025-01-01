@@ -1,5 +1,7 @@
 package net.bobdb.fun_with_chatbots;
 
+import jakarta.validation.Valid;
+import org.springframework.data.domain.Example;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,8 +17,13 @@ class DogController {
     }
 
     @GetMapping("/")
-    List<Dog> getAllDogs() {
+    List<Dog> findAllDogs() {
         return dogService.findAll();
+    }
+
+    @PostMapping("/search/example")
+    List<Dog> findDogsByExample(@RequestBody @Valid Dog dog) {
+        return dogService.findDogsByExample(dog);
     }
 
 }
