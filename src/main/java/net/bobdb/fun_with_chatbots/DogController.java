@@ -17,7 +17,7 @@ class DogController {
        this.dogService = dogService;
     }
 
-    @GetMapping("/")
+    @GetMapping("")
     List<Dog> findAllDogs() {
         return dogService.findAll();
     }

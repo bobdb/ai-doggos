@@ -10,10 +10,9 @@ I also think that I'm going to link in Elasticsearch
 ## So far, 4 endpoints
 
 /hello - for testing
-
 /chat - for blocking openAI 
-
 /stream - for streaming openAI
 
 /dogs - get all dogs, all fields
-
+/dogs/search/example - POST - QBE exact
+/dogs/search/one - POST - QBE exact
