@@ -3,8 +3,6 @@ package net.bobdb.fun_with_chatbots;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 
-import java.util.List;
-
 @RestController
 @CrossOrigin
 class ChatController {
@@ -31,11 +29,6 @@ class ChatController {
     @GetMapping("/stream")
     Flux<String> chatUsingStream(@RequestParam String message) {
         return chatService.promptWithStream(message);
-    }
-
-    @GetMapping("/dogs")
-    List<Dog> getAllDogs() {
-        return dogRepository.findAll();
     }
 
 }
