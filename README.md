@@ -16,3 +16,4 @@ I also think that I'm going to link in Elasticsearch
 /stream
 
 Also, it's going to have some Dog stuff
+---it's now getting loaded into a containerized Docker postgres instance

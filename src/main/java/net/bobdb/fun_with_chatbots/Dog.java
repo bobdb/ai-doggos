@@ -11,7 +11,6 @@ public class Dog {
     Integer id;
 
     String name;
-
     String breed;
     String description;
 
@@ -56,6 +55,5 @@ public class Dog {
     public void setBreed(String breed) {
         this.breed = breed;
     }
-
 
 }
