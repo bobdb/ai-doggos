@@ -1,8 +1,5 @@
 package net.bobdb.fun_with_chatbots;
 
-import org.springframework.ai.chat.client.ChatClient;
-import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
-import org.springframework.ai.chat.memory.InMemoryChatMemory;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 
@@ -10,12 +7,10 @@ import reactor.core.publisher.Flux;
 @CrossOrigin
 class ChatController {
 
-    private final ChatClient chatClient;
+    private final ChatService chatService;
 
-    public ChatController(ChatClient.Builder builder) {
-        this.chatClient = builder
-                            .defaultAdvisors(new MessageChatMemoryAdvisor(new InMemoryChatMemory()))
-                            .build();
+    public ChatController(ChatService chatService) {
+       this.chatService = chatService;
     }
 
     @GetMapping("/hello")
@@ -25,19 +20,12 @@ class ChatController {
 
     @PostMapping("/chat")
     String chat(@RequestParam String message) {
-        return chatClient.prompt()
-                .user(message)
-                .call()
-                .content();
+        return chatService.prompt(message);
     }
 
     @GetMapping("/stream")
     Flux<String> chatUsingStream(@RequestParam String message) {
-        return chatClient.prompt()
-                .user(message)
-                .stream()
-                .content();
+        return chatService.promptWithStream(message);
     }
-
 
 }
