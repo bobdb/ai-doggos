@@ -7,13 +7,13 @@ All this was derived from from Dan Vega's yt project.  I should have just forked
 
 I also think that I'm going to link in Elasticsearch
 
-## So far, 3 endpoints
+## So far, 4 endpoints
 
 /hello - for testing
 
-/chat - for basic openAI prompt
+/chat - for blocking openAI 
 
-/stream
+/stream - for streaming openAI
 
-Also, it's going to have some Dog stuff
----it's now getting loaded into a containerized Docker postgres instance
+/dogs - get all dogs, all fields
+
