@@ -2,6 +2,7 @@ package net.bobdb.fun_with_chatbots;
 
 import jakarta.persistence.NoResultException;
 import jakarta.validation.Valid;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,6 +20,18 @@ class DogController {
     @GetMapping("")
     List<Dog> findAllDogs() {
         return dogService.findAll();
+    }
+
+
+    @PostMapping("/search")
+    ResponseEntity<List<Dog>> findDogs(
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) String breed,
+            @RequestParam(required = false) String description) {
+
+        List<Dog> dogs = dogService.findDogsWithCustomSearch(name,breed, description);
+
+        return ResponseEntity.ok(dogs);
     }
 
     @PostMapping("/search/example")
