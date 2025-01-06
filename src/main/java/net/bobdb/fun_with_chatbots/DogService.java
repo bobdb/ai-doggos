@@ -1,5 +1,6 @@
 package net.bobdb.fun_with_chatbots;
 
+import jakarta.validation.Valid;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
@@ -30,4 +31,27 @@ public class DogService {
        Example<Dog> example = Example.of(dog);
        return dogRepository.findOne(example);
     }
+
+    //count
+    public long countByExample(@Valid Dog dog) {
+        Example<Dog> example = Example.of(dog);
+        return dogRepository.count(example);
+    }
+
+    //exists
+    public boolean existsByExample(@Valid Dog dog) {
+        Example<Dog> example = Example.of(dog);
+        return dogRepository.exists(example);
+    }
+
+
+    //some flexible searching...cool
+//            var reply = chatClient.prompt()
+//                    .advisors(new QuestionAnswerAdvisor(vectorStore))
+//                    .user("do you have any neurotic dogs?")
+//                    .call()
+//                    .content();
+
+//            System.out.println(reply);
+
 }

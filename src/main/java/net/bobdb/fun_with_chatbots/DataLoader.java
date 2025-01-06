@@ -16,13 +16,7 @@ public class DataLoader {
 //                                .formatted(dog.id(), dog.name(), dog.decription()));
 //                        vectorStore.add(List.of(doc));
 //                    });
-//            var reply = chatClient.prompt()
-//                    .advisors(new QuestionAnswerAdvisor(vectorStore))
-//                    .user("do you have any neurotic dogs?")
-//                    .call()
-//                    .content();
 
-//            System.out.println(reply);
         };
     }
 

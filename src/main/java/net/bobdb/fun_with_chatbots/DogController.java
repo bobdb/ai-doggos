@@ -2,7 +2,6 @@ package net.bobdb.fun_with_chatbots;
 
 import jakarta.persistence.NoResultException;
 import jakarta.validation.Valid;
-import org.springframework.data.domain.Example;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -31,6 +30,16 @@ class DogController {
     Dog findOneDogByExample(@RequestBody @Valid Dog dog) {
         return dogService.findOneDogByExample(dog)
                 .orElseThrow(()-> new NoResultException("no doggies found"));
+    }
+
+    @PostMapping("/count")
+    long countByExample(@RequestBody @Valid Dog dog) {
+        return dogService.countByExample(dog);
+    }
+
+    @PostMapping("/exists")
+    boolean existByExample(@RequestBody @Valid Dog dog) {
+        return dogService.existsByExample(dog);
     }
 
 }
