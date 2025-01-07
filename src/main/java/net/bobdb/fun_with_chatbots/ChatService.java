@@ -3,6 +3,7 @@ package net.bobdb.fun_with_chatbots;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
 import org.springframework.ai.chat.memory.InMemoryChatMemory;
+import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 
@@ -20,6 +21,12 @@ public class ChatService {
     public String prompt(String message) {
         return chatClient.prompt()
                 .user(message)
+                .call()
+                .content();
+    }
+
+    public String stuffedPrompt(Prompt prompt) {
+        return chatClient.prompt(prompt)
                 .call()
                 .content();
     }

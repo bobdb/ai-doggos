@@ -22,7 +22,6 @@ class DogController {
         return dogService.findAll();
     }
 
-
     @PostMapping("/search")
     ResponseEntity<List<Dog>> findDogs(
             @RequestParam(required = false) String name,
