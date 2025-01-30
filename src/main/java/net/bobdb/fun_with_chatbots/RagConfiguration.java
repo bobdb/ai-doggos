@@ -27,6 +27,12 @@ public class RagConfiguration {
     @Value("vectorStore.json")
     private String vectorStoreName;
 
+    private File getVectorStoreFile() {
+        var path = Paths.get("src","main","resources","data");
+        var absPath = path.toFile().getAbsolutePath() + "/" + vectorStoreName;
+        return new File(absPath);
+    }
+
     @Bean
     SimpleVectorStore simpleVectorStore(OpenAiEmbeddingModel model) {
         SimpleVectorStore simpleVectorStore = new SimpleVectorStore(model);
@@ -51,11 +57,7 @@ public class RagConfiguration {
 
     }
 
-    private File getVectorStoreFile() {
-        var path = Paths.get("src","main","resources","data");
-        var absPath = path.toFile().getAbsolutePath() + "/" + vectorStoreName;
-        return new File(absPath);
-    }
+
 
 
 }

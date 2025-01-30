@@ -1,6 +1,5 @@
 package net.bobdb.fun_with_chatbots;
 
-import org.springframework.ai.chat.model.ChatResponse;
 import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.ai.chat.prompt.PromptTemplate;
 import org.springframework.ai.document.Document;
@@ -25,14 +24,14 @@ class ChatController {
 
     private final VectorStore vectorStore;
 
-    @Value("classpath:/prompts/dogs.st")
-    private Resource doggos;
+    @Value("classpath:/prompts/basicPromptTemplate.st")
+    private Resource basicPromptTemplate;
 
-    @Value("classpath:/docs/names.txt")
-    private Resource names;
-
-    @Value("classpath:/prompts/dogs-rag.st")
+    @Value("classpath:/prompts/RagPromptTemplate.st")
     private Resource ragPromptTemplate;
+
+    @Value("${my.app.localfile}")
+    private Resource names;
 
     public ChatController(ChatService chatService, DogRepository dogRepository, VectorStore vectorStore) {
        this.chatService = chatService;
@@ -40,13 +39,9 @@ class ChatController {
        this.vectorStore = vectorStore;
     }
 
-    @GetMapping("/hello")
-    String hello() {
-        return "hello";
-    }
-
     @PostMapping("/chat")
     String chat(@RequestParam String message) {
+
         return chatService.prompt(message);
     }
 
@@ -59,7 +54,7 @@ class ChatController {
     String dogs(@RequestParam(value="message", defaultValue = "What are the names of my dogs?") String message,
                 @RequestParam(value="stuffit", defaultValue = "false") boolean stuffit) {
 
-        var promptTemplate = new PromptTemplate(doggos);
+        var promptTemplate = new PromptTemplate(basicPromptTemplate);
         var map = new HashMap<String, Object>();
         map.put("question", message);
         if (stuffit) {

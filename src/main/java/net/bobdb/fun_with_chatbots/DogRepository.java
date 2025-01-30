@@ -5,4 +5,4 @@ import org.springframework.data.repository.query.QueryByExampleExecutor;
 import org.springframework.stereotype.Repository;
 
 @Repository
-interface DogRepository extends JpaRepository<Dog, Integer>, QueryByExampleExecutor<Dog> {}
+public interface DogRepository extends JpaRepository<Dog, Integer>, QueryByExampleExecutor<Dog> {}
