@@ -25,7 +25,7 @@ public class ChatService {
                 .content();
     }
 
-    public String stuffedPrompt(Prompt prompt) {
+    public String prompt(Prompt prompt) {
         return chatClient.prompt(prompt)
                 .call()
                 .content();

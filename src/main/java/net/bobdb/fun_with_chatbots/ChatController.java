@@ -41,7 +41,6 @@ class ChatController {
 
     @PostMapping("/chat")
     String chat(@RequestParam String message) {
-
         return chatService.prompt(message);
     }
 
@@ -50,7 +49,7 @@ class ChatController {
         return chatService.promptWithStream(message);
     }
 
-    @GetMapping("/doggies")
+    @GetMapping("/dogs")
     String dogs(@RequestParam(value="message", defaultValue = "What are the names of my dogs?") String message,
                 @RequestParam(value="stuffit", defaultValue = "false") boolean stuffit) {
 
@@ -64,11 +63,11 @@ class ChatController {
         }
         Prompt prompt = promptTemplate.create(map);
 
-        return chatService.stuffedPrompt(prompt);
+        return chatService.prompt(prompt);
     }
 
-    @GetMapping("/doggiesAI")
-    String dogsAI(@RequestParam(value="message", defaultValue = "Can you recommend the cutest dog of all my dogs?") String message) {
+    @GetMapping("/recommendations")
+    String recommendations(@RequestParam(value="message", defaultValue = "Can you recommend the cutest dog of all my dogs?") String message) {
 
         List<Document> similarDocuments = vectorStore.similaritySearch(SearchRequest.query(message).withTopK(2));
         List<String> contentList = similarDocuments.stream().map(Document::getContent).toList();
@@ -78,7 +77,7 @@ class ChatController {
         promptParameters.put("documents", String.join("\n", contentList));
         Prompt prompt = promptTemplate.create(promptParameters);
 
-        return chatService.stuffedPrompt(prompt);  // works just as well, terrible name
+        return chatService.prompt(prompt);
     }
 
 
