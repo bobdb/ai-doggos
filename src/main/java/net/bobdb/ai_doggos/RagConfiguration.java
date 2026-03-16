@@ -35,7 +35,7 @@ public class RagConfiguration {
 
     @Bean
     SimpleVectorStore simpleVectorStore(OpenAiEmbeddingModel model) {
-        SimpleVectorStore simpleVectorStore = new SimpleVectorStore(model);
+        SimpleVectorStore simpleVectorStore = SimpleVectorStore.builder(model).build();
         File vectorStoreFile = getVectorStoreFile();
         if (vectorStoreFile.exists()) {
             log.info("vector store file exists.   loading...");
