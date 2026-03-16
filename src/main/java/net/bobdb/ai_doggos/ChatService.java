@@ -1,4 +1,4 @@
-package net.bobdb.fun_with_chatbots;
+package net.bobdb.ai_doggos;
 
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;

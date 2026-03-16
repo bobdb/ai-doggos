@@ -1,4 +1,4 @@
-package net.bobdb.fun_with_chatbots;
+package net.bobdb.ai_doggos;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,4 +1,4 @@
-package net.bobdb.fun_with_chatbots;
+package net.bobdb.ai_doggos;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;

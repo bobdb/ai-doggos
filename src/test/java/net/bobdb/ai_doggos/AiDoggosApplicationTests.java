@@ -1,10 +1,10 @@
-package net.bobdb.fun_with_chatbots;
+package net.bobdb.ai_doggos;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class FunWithChatbotsApplicationTests {
+class AiDoggosApplicationTests {
 
 	@Test
 	void contextLoads() {

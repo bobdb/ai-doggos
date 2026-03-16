@@ -1,4 +1,4 @@
-# fun-with-chatbots
+# ai-doggos
 
 A Spring Boot application exploring [Spring AI](https://spring.io/projects/spring-ai) capabilities: blocking and streaming OpenAI chat, prompt templating, RAG (Retrieval-Augmented Generation), and a sample Dog entity API. Frontend built with HTMX + Tailwind CSS.
 

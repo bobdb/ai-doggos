@@ -32,7 +32,7 @@ docker-compose up -d
 
 ## Architecture
 
-Single-package app (`net.bobdb.fun_with_chatbots`) with a layered structure:
+Single-package app (`net.bobdb.ai_doggos`) with a layered structure:
 
 ```
 Controller → Service → Repository (JPA)

@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>net.bobdb</groupId>
-	<artifactId>fun-with-chatbots</artifactId>
+	<artifactId>ai-doggos</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>fun-with-chatbots</name>
+	<name>ai-doggos</name>
 	<description>Demo project for Spring Boot</description>
 	<url/>
 	<licenses>
