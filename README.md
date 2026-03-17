@@ -4,12 +4,6 @@ A Spring Boot application exploring [Spring AI](https://spring.io/projects/sprin
 
 Derived from Dan Vega's YouTube project, rebuilt from scratch.
 
-## Requirements
-
-- **Java 21+**
-- **Docker** — runs Postgres via Docker Compose
-- **OpenAI API key** — set as `SPRING_AI_OPENAI_API_KEY` in your environment
-
 ## Running
 
 Set your OpenAI API key in `.env`:
@@ -23,7 +17,9 @@ Then load it into your environment before starting the app:
 ```bash
 # Bash
 source ./load-env.sh
+```
 
+```bash
 # PowerShell
 . .\load-env.ps1
 ```
@@ -33,7 +29,8 @@ Then start the app:
 ```bash
 # Start the database
 docker-compose up -d
-
+```
+```bash
 # Run the application
 ./mvnw spring-boot:run
 ```
@@ -63,15 +60,3 @@ docker-compose up -d
 | `POST /dogs/search/example/one` | Query by Example (single) |
 | `GET /dogs/count` | Count |
 | `GET /dogs/exists?...` | Check existence |
-
-A dog has the shape: `{ name, breed, description }`. The DB is seeded with 91 dogs on startup.
-
-## Tech Stack
-
-| | |
-|---|---|
-| Language / Framework | Java 21, Spring Boot 3.4.1 |
-| AI | Spring AI 1.0.0-M4, OpenAI `gpt-4o` |
-| Database | Postgres via Docker Compose |
-| RAG | SimpleVectorStore (JSON file) |
-| Frontend | HTMX + Tailwind CSS |

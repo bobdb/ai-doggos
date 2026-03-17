@@ -1,3 +1,5 @@
 target
 .idea
 .env
+frontend/node_modules
+.claude/settings.local.json

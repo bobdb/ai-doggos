@@ -1,0 +1,10 @@
+@import "tailwindcss";
+
+body {
+  margin: 0;
+}
+
+.message-content {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
