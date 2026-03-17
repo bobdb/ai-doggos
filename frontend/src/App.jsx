@@ -3,10 +3,8 @@ import ChatTab from './components/ChatTab.jsx'
 import AiFeaturesTab from './components/AiFeaturesTab.jsx'
 import DogsTab from './components/DogsTab.jsx'
 
-const TABS = ['Chat', 'AI Features', 'Dogs']
-
 function App() {
-  const [activeTab, setActiveTab] = useState('Chat')
+  const [activeView, setActiveView] = useState('dogchat')
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col">
@@ -16,27 +14,38 @@ function App() {
             🐶 AI Doggos
           </h1>
           <nav className="flex gap-2 justify-center">
-            {TABS.map((tab) => (
-              <button
-                key={tab}
-                onClick={() => setActiveTab(tab)}
-                className={`px-4 py-2 rounded-lg font-medium transition-colors ${
-                  activeTab === tab
-                    ? 'bg-blue-500 text-white'
-                    : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-                }`}
-              >
-                {tab}
-              </button>
-            ))}
+            <button
+              onClick={() => setActiveView('dogchat')}
+              className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+                activeView === 'dogchat'
+                  ? 'bg-blue-500 text-white'
+                  : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+              }`}
+            >
+              DogChat
+            </button>
+            <button
+              onClick={() => setActiveView('dogcatalog')}
+              className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+                activeView === 'dogcatalog'
+                  ? 'bg-blue-500 text-white'
+                  : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+              }`}
+            >
+              DogCatalog
+            </button>
           </nav>
         </div>
       </header>
 
       <main className="flex-1 max-w-5xl w-full mx-auto px-4 py-6">
-        {activeTab === 'Chat' && <ChatTab />}
-        {activeTab === 'AI Features' && <AiFeaturesTab />}
-        {activeTab === 'Dogs' && <DogsTab />}
+        {activeView === 'dogchat' && (
+          <>
+            <ChatTab />
+            <AiFeaturesTab />
+          </>
+        )}
+        {activeView === 'dogcatalog' && <DogsTab />}
       </main>
     </div>
   )
