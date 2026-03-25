@@ -43,8 +43,6 @@ docker-compose up -d
 |---|---|
 | `GET /chat?message=...` | Blocking OpenAI call with conversation memory |
 | `GET /stream?message=...` | Streaming SSE response |
-| `GET /dogs?message=...` | Chat with prompt stuffed with local dog names |
-| `GET /recommendations?message=...` | RAG-powered search against dog breed details |
 
 ### Dog API
 
@@ -60,3 +58,6 @@ docker-compose up -d
 | `POST /dogs/search/example/one` | Query by Example (single) |
 | `GET /dogs/count` | Count |
 | `GET /dogs/exists?...` | Check existence |
+| `GET /dogs?message=...` | Chat with prompt stuffed with local dog names |
+| `GET /recommendations?message=...` | RAG-powered search against dog breed details |
+

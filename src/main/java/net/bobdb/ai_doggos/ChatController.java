@@ -39,12 +39,12 @@ class ChatController {
        this.vectorStore = vectorStore;
     }
 
-    @PostMapping("/chat")
+    @PostMapping("/chat-blocking")
     String chat(@RequestParam String message) {
         return chatService.prompt(message);
     }
 
-    @GetMapping("/stream")
+    @GetMapping("/chat-streaming")
     Flux<String> chatUsingStream(@RequestParam String message) {
         return chatService.promptWithStream(message);
     }
@@ -66,7 +66,7 @@ class ChatController {
         return chatService.prompt(prompt);
     }
 
-    @GetMapping("/recommendations")
+    @GetMapping("/dogs/recommendations")
     String recommendations(@RequestParam(value="message", defaultValue = "Can you recommend the cutest dog of all my dogs?") String message) {
 
         List<Document> similarDocuments = vectorStore.similaritySearch(SearchRequest.builder().query(message).topK(2).build());

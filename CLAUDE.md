@@ -53,7 +53,7 @@ DogController  → DogService  → DogRepository
 | `GET /chat?message=...` | Blocking OpenAI call with chat memory |
 | `GET /stream?message=...` | Streaming SSE response |
 | `GET /dogs?message=...` | Prompt stuffed with local dog names from `names.txt` |
-| `GET /recommendations?message=...` | RAG search against `doggiedetails.txt` vector store |
+| `GET /dogs/recommendations?message=...` | RAG search against `doggiedetails.txt` vector store |
 
 **Dog CRUD/search endpoints** (`/dogs`): standard CRUD plus `/search`, `/search/example`, `/search/example/one`, `/count`, `/exists`.
 
