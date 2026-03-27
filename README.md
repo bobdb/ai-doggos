@@ -1,8 +1,10 @@
 # ai-doggos
 
-A Spring Boot application exploring [Spring AI](https://spring.io/projects/spring-ai) capabilities: blocking and streaming OpenAI chat, prompt templating, RAG (Retrieval-Augmented Generation), and a sample Dog entity API. Frontend built with HTMX + Tailwind CSS.
+The point of this app is to use it to play around with [Spring AI](https://spring.io/projects/spring-ai) 
+Things like: blocking and streaming chat, prompt stuffing, templating, RAG, etc...
 
-Derived from Dan Vega's YouTube project, rebuilt from scratch.
+It's dog focused.
+Derived originally from a Dan Vega podcase project.  Now way different, but he should get some cred.
 
 ## Running
 
@@ -38,26 +40,27 @@ docker-compose up -d
 ## Endpoints
 
 ### Chat
+(chat memory is active)
 
 | Endpoint | Description |
 |---|---|
-| `GET /chat?message=...` | Blocking OpenAI call with conversation memory |
+| `GET /chat?message=...` | Blocking OpenAI call|
 | `GET /stream?message=...` | Streaming SSE response |
 
 ### Dog API
 
-| Endpoint | Description |
-|---|---|
-| `GET /dogs` | List all dogs |
-| `GET /dogs/{id}` | Get by ID |
-| `POST /dogs` | Create |
-| `PUT /dogs/{id}` | Update |
-| `DELETE /dogs/{id}` | Delete |
-| `GET /dogs/search?...` | Substring search by field |
-| `POST /dogs/search/example` | Query by Example (list) |
-| `POST /dogs/search/example/one` | Query by Example (single) |
-| `GET /dogs/count` | Count |
-| `GET /dogs/exists?...` | Check existence |
-| `GET /dogs?message=...` | Chat with prompt stuffed with local dog names |
-| `GET /recommendations?message=...` | RAG-powered search against dog breed details |
+| Endpoint                                | Description |
+|-----------------------------------------|---|
+| `GET /dogs`                             | List all dogs |
+| `GET /dogs/{id}`                        | Get by ID |
+| `POST /dogs`                            | Create |
+| `PUT /dogs/{id}`                        | Update |
+| `DELETE /dogs/{id}`                     | Delete |
+| `GET /dogs/search?...`                  | Substring search by field |
+| `POST /dogs/search/example`             | Query by Example (list) |
+| `POST /dogs/search/example/one`         | Query by Example (single) |
+| `GET /dogs/count`                       | Count |
+| `GET /dogs/exists?...`                  | Check existence |
+| `GET /dogs?message=...`                 | Chat with prompt stuffed with local dog names |
+| `GET /dogs/recommendations?message=...` | RAG-powered search against dog breed details |
 
