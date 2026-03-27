@@ -30,7 +30,7 @@ export default function ChatTab() {
 
   async function sendBlocking(text) {
     try {
-      const res = await fetch('/chat?message=' + encodeURIComponent(text), {
+      const res = await fetch('/chat-blocking?message=' + encodeURIComponent(text), {
         method: 'POST',
       })
       if (!res.ok) throw new Error(`HTTP ${res.status}`)
@@ -51,7 +51,7 @@ export default function ChatTab() {
 
     try {
       const res = await fetchWithRetry(
-        '/stream?message=' + encodeURIComponent(text)
+        '/chat-streaming?message=' + encodeURIComponent(text)
       )
       const reader = res.body.getReader()
       const decoder = new TextDecoder('utf-8')

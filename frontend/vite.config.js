@@ -7,8 +7,8 @@ export default defineConfig({
   plugins: [react(), tailwindcss()],
   server: {
     proxy: {
-      '/chat': 'http://localhost:8080',
-      '/stream': 'http://localhost:8080',
+      '/chat-blocking': 'http://localhost:8080',
+      '/chat-streaming': 'http://localhost:8080',
       '/dogs': 'http://localhost:8080',
       '/recommendations': 'http://localhost:8080',
       '/actuator': 'http://localhost:8080',
