@@ -49,7 +49,7 @@ class ChatController {
         return chatService.promptWithStream(message);
     }
 
-    @GetMapping("/dogs")
+    @GetMapping("/ai/dogs")
     String dogs(@RequestParam(value="message", defaultValue = "What are the names of my dogs?") String message,
                 @RequestParam(value="stuffit", defaultValue = "false") boolean stuffit) {
 

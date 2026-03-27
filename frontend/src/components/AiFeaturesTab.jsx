@@ -37,7 +37,7 @@ export default function AiFeaturesTab() {
         message: dogsMessage,
         stuffit: stuffit ? 'true' : 'false',
       })
-      const res = await fetch('/dogs?' + params.toString())
+      const res = await fetch('/ai/dogs?' + params.toString())
       if (!res.ok) throw new Error(`HTTP ${res.status}`)
       const text = await res.text()
       setDogsResponse(text)
@@ -76,7 +76,7 @@ export default function AiFeaturesTab() {
         </h2>
         <p className="text-sm text-gray-500 mb-4">
           Asks the AI about dogs with or without local dog names stuffed into the
-          prompt (<code className="bg-gray-100 px-1 rounded">GET /dogs</code>).
+          prompt (<code className="bg-gray-100 px-1 rounded">GET /ai/dogs</code>).
         </p>
         <form onSubmit={handleDogsSubmit} className="space-y-3">
           <input
