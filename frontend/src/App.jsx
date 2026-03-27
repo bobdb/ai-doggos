@@ -1,10 +1,23 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import ChatTab from './components/ChatTab.jsx'
 import AiFeaturesTab from './components/AiFeaturesTab.jsx'
 import DogsTab from './components/DogsTab.jsx'
 
+const statusConfig = {
+  checking: { dot: 'bg-gray-400', text: 'text-gray-500', label: 'Checking backend…' },
+  up:       { dot: 'bg-green-500', text: 'text-green-600', label: 'Backend online' },
+  down:     { dot: 'bg-red-500',   text: 'text-red-600',   label: 'Backend offline' },
+}
+
 function App() {
   const [activeView, setActiveView] = useState('dogchat')
+  const [backendStatus, setBackendStatus] = useState('checking')
+
+  useEffect(() => {
+    fetch('/actuator/health')
+      .then(res => setBackendStatus(res.ok ? 'up' : 'down'))
+      .catch(() => setBackendStatus('down'))
+  }, [])
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col">
@@ -13,6 +26,17 @@ function App() {
           <h1 className="text-2xl font-bold text-gray-800 text-center mb-4">
             🐶 AI Doggos
           </h1>
+          <div className="flex justify-center mb-3">
+            {(() => {
+              const { dot, text, label } = statusConfig[backendStatus]
+              return (
+                <span className={`flex items-center gap-1.5 text-sm ${text}`}>
+                  <span className={`inline-block w-2 h-2 rounded-full ${dot}`} />
+                  {label}
+                </span>
+              )
+            })()}
+          </div>
           <nav className="flex gap-2 justify-center">
             <button
               onClick={() => setActiveView('dogchat')}

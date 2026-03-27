@@ -11,6 +11,7 @@ export default defineConfig({
       '/stream': 'http://localhost:8080',
       '/dogs': 'http://localhost:8080',
       '/recommendations': 'http://localhost:8080',
+      '/actuator': 'http://localhost:8080',
     },
   },
 })
