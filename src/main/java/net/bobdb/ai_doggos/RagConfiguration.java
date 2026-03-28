@@ -57,7 +57,9 @@ public class RagConfiguration {
 
     }
 
-
-
+    @Bean
+    RagService ragService(OpenAiEmbeddingModel model, SimpleVectorStore simpleVectorStore) {
+        return new RagService(model, simpleVectorStore);
+    }
 
 }

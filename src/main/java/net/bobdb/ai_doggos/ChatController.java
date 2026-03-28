@@ -2,17 +2,12 @@ package net.bobdb.ai_doggos;
 
 import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.ai.chat.prompt.PromptTemplate;
-import org.springframework.ai.document.Document;
-import org.springframework.ai.vectorstore.SearchRequest;
-import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 @RestController
 @CrossOrigin
@@ -22,21 +17,15 @@ class ChatController {
 
     private final DogRepository dogRepository;
 
-    private final VectorStore vectorStore;
-
     @Value("classpath:/prompts/basicPromptTemplate.st")
     private Resource basicPromptTemplate;
-
-    @Value("classpath:/prompts/RagPromptTemplate.st")
-    private Resource ragPromptTemplate;
 
     @Value("${my.app.localfile}")
     private Resource names;
 
-    public ChatController(ChatService chatService, DogRepository dogRepository, VectorStore vectorStore) {
+    public ChatController(ChatService chatService, DogRepository dogRepository) {
        this.chatService = chatService;
        this.dogRepository = dogRepository;
-       this.vectorStore = vectorStore;
     }
 
     @PostMapping("/chat-blocking")
@@ -65,21 +54,5 @@ class ChatController {
 
         return chatService.prompt(prompt);
     }
-
-    @GetMapping("/dogs/recommendations")
-    String recommendations(@RequestParam(value="message", defaultValue = "Can you recommend the cutest dog of all my dogs?") String message) {
-
-        List<Document> similarDocuments = vectorStore.similaritySearch(SearchRequest.builder().query(message).topK(2).build());
-        List<String> contentList = similarDocuments.stream().map(Document::getText).toList();
-        PromptTemplate promptTemplate = new PromptTemplate(ragPromptTemplate);
-        Map<String, Object> promptParameters = new HashMap<>();
-        promptParameters.put("input", message);
-        promptParameters.put("documents", String.join("\n", contentList));
-        Prompt prompt = promptTemplate.create(promptParameters);
-
-        return chatService.prompt(prompt);
-    }
-
-
 
 }
