@@ -1,8 +1,7 @@
 import { useState, useRef, useEffect } from 'react'
 
-export default function ChatTab() {
+export default function ChatTab({ messages, setMessages }) {
   const [mode, setMode] = useState('blocking')
-  const [messages, setMessages] = useState([])
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
   const messagesEndRef = useRef(null)

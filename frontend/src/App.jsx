@@ -12,6 +12,8 @@ const statusConfig = {
 function App() {
   const [activeView, setActiveView] = useState('dogchat')
   const [backendStatus, setBackendStatus] = useState('checking')
+  const [messages, setMessages] = useState([])
+  const addMessage = (msg) => setMessages(prev => [...prev, msg])
 
   useEffect(() => {
     fetch('/actuator/health')
@@ -66,10 +68,10 @@ function App() {
         {activeView === 'dogchat' && (
           <div className="flex gap-4 h-[calc(100vh-180px)]">
             <div className="flex-1 min-w-0">
-              <ChatTab />
+              <ChatTab messages={messages} setMessages={setMessages} />
             </div>
             <div className="w-96 overflow-y-auto">
-              <AiFeaturesTab />
+              <AiFeaturesTab addMessage={addMessage} />
             </div>
           </div>
         )}
