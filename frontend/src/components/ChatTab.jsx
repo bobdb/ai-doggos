@@ -96,7 +96,7 @@ export default function ChatTab() {
   }
 
   return (
-    <div className="flex flex-col h-[calc(100vh-180px)]">
+    <div className="flex flex-col h-full">
       {/* Mode toggle */}
       <div className="flex gap-2 mb-4">
         <span className="text-sm text-gray-600 self-center">Mode:</span>

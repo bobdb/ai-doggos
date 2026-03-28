@@ -64,10 +64,14 @@ function App() {
 
       <main className="flex-1 max-w-5xl w-full mx-auto px-4 py-6">
         {activeView === 'dogchat' && (
-          <>
-            <ChatTab />
-            <AiFeaturesTab />
-          </>
+          <div className="flex gap-4 h-[calc(100vh-180px)]">
+            <div className="flex-1 min-w-0">
+              <ChatTab />
+            </div>
+            <div className="w-96 overflow-y-auto">
+              <AiFeaturesTab />
+            </div>
+          </div>
         )}
         {activeView === 'dogcatalog' && <DogsTab />}
       </main>
