@@ -38,6 +38,17 @@ class ChatController {
         return chatService.promptWithStream(message);
     }
 
+    @PostMapping("/chat/reset")
+    String resetChat(@RequestParam(defaultValue = "false") boolean stuffit) throws Exception {
+        chatService.reset();
+        if (stuffit) {
+            var content = new String(names.getInputStream().readAllBytes());
+            chatService.seedMemory(content);
+            return content;
+        }
+        return "";
+    }
+
     @GetMapping("/ai/dogs")
     String dogs(@RequestParam(value="message", defaultValue = "What are the names of my dogs?") String message,
                 @RequestParam(value="stuffit", defaultValue = "false") boolean stuffit) {

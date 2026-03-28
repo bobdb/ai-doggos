@@ -3,6 +3,7 @@ package net.bobdb.ai_doggos;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
 import org.springframework.ai.chat.memory.MessageWindowChatMemory;
+import org.springframework.ai.chat.messages.UserMessage;
 import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
@@ -11,8 +12,10 @@ import reactor.core.publisher.Flux;
 public class ChatService {
 
     private final ChatClient chatClient;
+    private final MessageWindowChatMemory memory;
 
     public ChatService(ChatClient.Builder builder) {
+        this.memory = MessageWindowChatMemory.builder().build();
         this.chatClient = builder
                 .defaultSystem("""
                         You are a dog expert assistant for the AI Doggos pet shop.
@@ -20,8 +23,16 @@ public class ChatService {
                         You can also answer questions about the specific dogs available in this shop's database.
                         For any question unrelated to dogs, politely decline and invite the user to ask a dog-related question instead.
                         """)
-                .defaultAdvisors(MessageChatMemoryAdvisor.builder(MessageWindowChatMemory.builder().build()).build())
+                .defaultAdvisors(MessageChatMemoryAdvisor.builder(memory).build())
                 .build();
+    }
+
+    public void reset() {
+        memory.clear("default");
+    }
+
+    public void seedMemory(String content) {
+        memory.add("default", new UserMessage(content));
     }
 
     public String prompt(String message) {
