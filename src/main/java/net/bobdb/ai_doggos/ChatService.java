@@ -14,6 +14,12 @@ public class ChatService {
 
     public ChatService(ChatClient.Builder builder) {
         this.chatClient = builder
+                .defaultSystem("""
+                        You are a dog expert assistant for the AI Doggos pet shop.
+                        You only answer questions about dogs: breeds, behavior, care, health, and training.
+                        You can also answer questions about the specific dogs available in this shop's database.
+                        For any question unrelated to dogs, politely decline and invite the user to ask a dog-related question instead.
+                        """)
                 .defaultAdvisors(MessageChatMemoryAdvisor.builder(MessageWindowChatMemory.builder().build()).build())
                 .build();
     }
