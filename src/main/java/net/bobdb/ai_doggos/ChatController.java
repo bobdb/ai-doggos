@@ -39,10 +39,13 @@ class ChatController {
     }
 
     @PostMapping("/chat/reset")
-    String resetChat(@RequestParam(defaultValue = "false") boolean stuffit) throws Exception {
+    String resetChat(@RequestParam(defaultValue = "false") boolean stuffit,
+                     @RequestParam(required = false, defaultValue = "") String stuffContent) throws Exception {
         chatService.reset();
         if (stuffit) {
-            var content = new String(names.getInputStream().readAllBytes());
+            var content = stuffContent.isBlank()
+                    ? new String(names.getInputStream().readAllBytes())
+                    : stuffContent;
             chatService.seedMemory(content);
             return content;
         }
@@ -51,13 +54,14 @@ class ChatController {
 
     @GetMapping("/ai/dogs")
     String dogs(@RequestParam(value="message", defaultValue = "What are the names of my dogs?") String message,
-                @RequestParam(value="stuffit", defaultValue = "false") boolean stuffit) {
+                @RequestParam(value="stuffit", defaultValue = "false") boolean stuffit,
+                @RequestParam(value="stuffContent", required = false, defaultValue = "") String stuffContent) {
 
         var promptTemplate = new PromptTemplate(basicPromptTemplate);
         var map = new HashMap<String, Object>();
         map.put("question", message);
         if (stuffit) {
-            map.put("context",names);
+            map.put("context", stuffContent.isBlank() ? names : stuffContent);
         } else {
             map.put("context","");
         }

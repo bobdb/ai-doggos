@@ -9,6 +9,8 @@ export default defineConfig({
     proxy: {
       '/chat-blocking': 'http://localhost:8080',
       '/chat-streaming': 'http://localhost:8080',
+      '/chat': 'http://localhost:8080',
+      '/ai': 'http://localhost:8080',
       '/dogs': 'http://localhost:8080',
       '/recommendations': 'http://localhost:8080',
       '/actuator': 'http://localhost:8080',
