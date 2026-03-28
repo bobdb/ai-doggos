@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
 
-export default function ChatTab({ messages, setMessages }) {
+export default function ChatTab({ messages, setMessages, ragFile, useRagFile }) {
   const [mode, setMode] = useState('blocking')
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
@@ -19,12 +19,29 @@ export default function ChatTab({ messages, setMessages }) {
     setMessages((prev) => [...prev, { role: 'user', content: text }])
     setLoading(true)
 
-    if (mode === 'blocking') {
+    if (useRagFile && ragFile) {
+      await sendRag(text)
+    } else if (mode === 'blocking') {
       await sendBlocking(text)
     } else {
       await sendStreaming(text)
     }
     setLoading(false)
+  }
+
+  async function sendRag(text) {
+    try {
+      const formData = new FormData()
+      formData.append('file', ragFile)
+      const up = await fetch('/rag/upload', { method: 'POST', body: formData })
+      if (!up.ok) throw new Error(`Upload failed: HTTP ${up.status}`)
+      const res = await fetch('/recommendations?message=' + encodeURIComponent(text))
+      if (!res.ok) throw new Error(`HTTP ${res.status}`)
+      const reply = await res.text()
+      setMessages((prev) => [...prev, { role: 'bot', content: reply }])
+    } catch (err) {
+      setMessages((prev) => [...prev, { role: 'system', content: `Error: ${err.message}` }])
+    }
   }
 
   async function sendBlocking(text) {

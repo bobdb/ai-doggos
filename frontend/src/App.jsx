@@ -14,6 +14,8 @@ function App() {
   const [backendStatus, setBackendStatus] = useState('checking')
   const [messages, setMessages] = useState([])
   const addMessage = (msg) => setMessages(prev => [...prev, msg])
+  const [ragFile, setRagFile] = useState(null)
+  const [useRagFile, setUseRagFile] = useState(false)
 
   useEffect(() => {
     fetch('/actuator/health')
@@ -68,10 +70,10 @@ function App() {
         {activeView === 'dogchat' && (
           <div className="flex gap-4 h-[calc(100vh-180px)]">
             <div className="flex-1 min-w-0">
-              <ChatTab messages={messages} setMessages={setMessages} />
+              <ChatTab messages={messages} setMessages={setMessages} ragFile={ragFile} useRagFile={useRagFile} />
             </div>
             <div className="w-96 overflow-y-auto">
-              <AiFeaturesTab addMessage={addMessage} />
+              <AiFeaturesTab addMessage={addMessage} ragFile={ragFile} setRagFile={setRagFile} useRagFile={useRagFile} setUseRagFile={setUseRagFile} />
             </div>
           </div>
         )}
